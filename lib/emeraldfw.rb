@@ -1,4 +1,4 @@
-require "emeraldfw21/version"
+require "emeraldfw/version"
 
 module EmeraldFW
   # Your code goes here...
