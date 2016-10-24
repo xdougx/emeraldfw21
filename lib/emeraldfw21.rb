@@ -1,5 +1,5 @@
 require "emeraldfw21/version"
 
-module Emeraldfw21
+module EmeraldFW
   # Your code goes here...
 end

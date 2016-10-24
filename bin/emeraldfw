@@ -1,0 +1,37 @@
+#!/usr/bin/env ruby
+
+require 'slop'
+require 'emeraldfw'
+
+opts = Slop.parse do |o|
+
+  # If --version is among the parameters, show version and exit
+  o.on '-v', '--version' do
+  	EmeraldFW.emerald_name
+  	exit
+  end
+
+  # Parameters for Project
+  o.string  '-l', '--language',  'Sets the language for the project',                  default: 'ruby'
+  o.string  '-t', '--test',      'Sets the test framework for the project',            default: 'rspec'
+  o.string  '-d', '--database',  'Sets the database for the project',                  default: 'postgresql'
+  o.string  '-a', '--archetype', 'Sets the database for the project',                  default: 'generic'
+
+  # Parameters for Template
+  o.string  '-j', '--jslibs',    'JavaScript|CSS libraries to be added to a template', default: 'jquery:bootstrap'
+
+  # Parameters for Page
+  o.string  '-T', '--template',  'JavaScript|CSS libraries to be added to a template', default: 'default'
+
+  # Parameters for Component
+  o.boolean '-R', '--remote',    'Remote component',                                   default: false
+  o.boolean '-D', '--dynamic',   'Dynamic component',                                  default: false
+
+  # Parameters for Form
+  o.string '-f', '--fields',     'Fields to add to a form',                            default: nil 
+
+end
+
+arguments = opts.arguments
+
+EmeraldFW.start(arguments,opts.to_hash)
