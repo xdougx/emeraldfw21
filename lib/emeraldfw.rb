@@ -1,5 +1,6 @@
 require 'json'
 
+require "entities/project"
 
 module EmeraldFW
 
