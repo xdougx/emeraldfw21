@@ -10,8 +10,8 @@ describe EmeraldFW  do
 
   context 'Submodules' do 
 
-  	it 'has a EmeraldFW::Entities submodule' do 
-  	  expect(EmeraldFW::Entities).not_to be nil
+  	it 'has a EmeraldFW::Entity submodule' do 
+  	  expect(EmeraldFW::Entity).not_to be nil
   	end
 
   end
