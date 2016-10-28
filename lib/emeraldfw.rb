@@ -4,7 +4,6 @@ require "entities/project"
 
 module EmeraldFW
 
-
   @entities = [ :component, :email, :form, :library, :page, :project, :resource, :template ].sort
 
   def self.emeraldfw_init
@@ -21,7 +20,7 @@ module EmeraldFW
     @options = opts
 
     # Isolates the entitle which will handle the command line request
-    @entity = @arguments.shift
+    @entity = @arguments[0]
     exit_error(103,@entites) if not @entities.include?(@entity.to_sym)
 
     # Creates a reference to the command class
