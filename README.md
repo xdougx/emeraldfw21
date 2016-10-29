@@ -36,22 +36,23 @@ Or install it yourself as:
 
 Emerald is based in some 'entities'. There are six of them by now.
 
-- **Project**
-    
-A project is an Emerald application. In order to create a new Emerald application:
+**(A) Project** =>  A project is an Emerald application.
+
+**(a.1)** In order to create a new Emerald application:
 
 ```bash
 $ emeraldfw project create <your_project_name>
 ```
 
 **IMPORTANT:** Emerald apps are created at `ENV['HOME']/emeraldfw/` directory. It is impossible to change this right now, but in future versions this location will be dictated by the user.
-To see a list of all Emerald applications in your workspace:
+
+**(a.2)** To see a list of all Emerald applications in your workspace:
 
 ```
 $ emeraldfw project list
 ```
 
-To remove an Emerald application from your workspace:
+**(a.3)** To remove an Emerald application from your workspace:
 
 ```
 $ emerald project remove <your_project_name>
@@ -59,7 +60,7 @@ $ emerald project remove <your_project_name>
 
 **IMPORTANT:** This action can't be undone. Be sure to have a backup if you use it, and be sure to use it against the correct project. We assume you are intelligent and smart enough o avoid erasing an important project and we won't treat you like Windows do, asking a many times if you are sure. So, be sure!
 
-To set the current project for anonymous actions (those who have effect on a project without specifying its name):
+**(a.4)** To set the current project for anonymous actions (those who have effect on a project without specifying its name):
 
 ```
 $ emerald project current <your_project_name>
@@ -67,20 +68,33 @@ $ emerald project current <your_project_name>
 
 **IMPORTANT:** When you create a project it turns out to be the current project.
 
-- **Template**
+**(a.5)** To add an email to receive notifications about changes in the current project:
+
+```
+$ emerald project notify <email_address>
+```
+
+**(a.6)** To remove an email from the notifications list:
+
+```
+$ emerald project unnotify <email_address>
+```
+
+
+**(B) Template**
 
 One may insert web pages into a container. They may be inserted inside the <body></body> tag or in any container with an ID. When you create a new project it comes with with a template named 'default.html', which is at `ENV['HOME']/emeraldfw/your_app/web/views/templates`. Templates are pure HTML/Javascript. No special tags, no meta language... no bullshit. Pure HTML/Javascript.
 
-To create a template:
+**(b.1)** To create a template:
 
 ```bash
-$ emeraldfw create template <template_name>
+$ emeraldfw template create <template_name>
 ```
 
-To delete a template:
+**(b.2)** To delete a template:
 
 ```bash
-$ emeraldfw delete template <template_name>
+$ emeraldfw template remove <template_name>
 ```
 
 - **Page**
