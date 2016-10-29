@@ -47,12 +47,14 @@ def $entity_obj.current_project
 end
 
 def $entity_obj.unzip_project_files
-  Zip::File.open(project_structure_zip) do |zip_file|
+  this_path = File.expand_path("../../../../files", __FILE__)
+  app_structure_file = "#{this_path}/appstructure-ef.zip"
+  Zip::File.open(app_structure_file) do |zip_file|
     zip_file.each do |entry|
       entry_arr = entry.name.split('/')
       base_dir = entry_arr.shift
       dest_file_name = entry_arr.join('/')
-      dest_file = "#{project_full_path}/#{dest_file_name}".gsub('-ef-master','')
+      dest_file = "#{entity_base_dir}/#{$entity_obj.project_name}/#{dest_file_name}"
       puts dest_file
       FileUtils.rm_f(dest_file) if File.exist?(dest_file)
       entry.extract(dest_file)
@@ -65,12 +67,10 @@ end
 # 
 
 def $entity_obj.list
-  puts __FILE__
-  puts File.expand_path(__FILE__)  
   print "Emerald Framework ".colorize(:green)
   puts "project\'s list:"
   $entity_obj.project_list.each do |p|
-    print "\t#{p} - #{$entity_obj.current_project}".colorize(:light_green)
+    print "  * #{p}".colorize(:light_green)
     puts (p == $entity_obj.current_project) ? " (current)" : ""
   end
 end
