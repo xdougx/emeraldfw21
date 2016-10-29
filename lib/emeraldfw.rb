@@ -31,7 +31,7 @@ module EmeraldFW
     $entity_obj = EmeraldFW::Entity.new(@arguments,@options)
 
     # Requires the correct block for the entity type
-    require "entities/#{@entity}"
+    require "entities/desc/#{@entity}"
 
     # Process the command required at the command line
     $entity_obj.execute_command
