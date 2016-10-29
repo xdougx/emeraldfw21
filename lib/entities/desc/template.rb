@@ -52,53 +52,13 @@ end
 # 
 
 def $entity_obj.list
-  print "Emerald Framework ".colorize(:green)
-  puts "project\'s list:"
-  $entity_obj.project_list.each do |p|
-    print "  * #{p}".colorize(:light_green)
-    puts (p === $entity_obj.current_project) ? " (current)" : " "
-  end
 end
 
 def $entity_obj.create
-  EmeraldFW.exit_error(201) if $entity_obj.project_exists?($entity_obj.project_name)
-  json = json_contents
-  json['projects'].push($entity_obj.project_name)
-  json['current'] = $entity_obj.project_name
-  json[$entity_obj.project_name] = {}
-  json[$entity_obj.project_name]['notify_list'] = []
-  $entity_obj.json_write(json)
 end
 
 def $entity_obj.remove
-  EmeraldFW.exit_error(202) if not $entity_obj.project_exists?($entity_obj.project_name)
-  json = json_contents
-  json['projects'].delete($entity_obj.project_name)
-  json['current'] = "" if json['current'] == $entity_obj.project_name
-  json.delete($entity_obj.project_name)
-  $entity_obj.json_write(json)
 end
 
-def $entity_obj.current
-  EmeraldFW.exit_error(202) if not $entity_obj.project_exists?($entity_obj.project_name)
-  json = json_contents
-  json['current'] = $entity_obj.project_name
-  $entity_obj.json_write(json)
-end
-
-def $entity_obj.notify
-  EmeraldFW.exit_error(104) if not $entity_obj.valid_email?($entity_obj.email)
-  json = json_contents
-  project_key = $entity_obj.current_project
-  json[project_key]['notify_list'].push($entity_obj.email)
-  $entity_obj.json_write(json)
-end
-
-def $entity_obj.unnotify
-  EmeraldFW.exit_error(104) if not $entity_obj.valid_email?($entity_obj.email)
-  EmeraldFW.exit_error(105) if not $entity_obj.email_in_notify_list?($entity_obj.email)
-  json = json_contents
-  project_key = $entity_obj.current_project
-  json[project_key]['notify_list'].delete($entity_obj.email)
-  $entity_obj.json_write(json)
+def $entity_obj.default
 end
