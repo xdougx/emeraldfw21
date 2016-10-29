@@ -4,9 +4,12 @@ module EmeraldFW
   	101 => "Invalid number of arguments.",
   	102 => "Invalid command.",
   	103 => "Invalid entity.",
+    104 => "Invalid email.",
+    105 => "This email is not in the notify list for the current project.",
 
   	201 => "Project already exists.",
   	202 => "Project does not exist."
+    
   }
 
   # Exit point

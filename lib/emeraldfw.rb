@@ -27,13 +27,15 @@ module EmeraldFW
     @entity = @arguments[0]
     exit_error(103,@entites) if not @entities.include?(@entity.to_sym)
 
+    # Creates an instante of the entity class
+    $entity_obj = EmeraldFW::Entity.new(@arguments,@options)
+
     # Requires the correct block for the entity type
     require "entities/#{@entity}"
 
-    # Creates a reference to the command class
-  	entity_class = EmeraldFW::Entity.new(@arguments,@options)
-    $entity_block.call(entity_class)
-    entity_class.execute
+    # Process the command required at the command line
+    $entity_obj.execute_command
+
   end
 
   def self.emerald_projects_dir
