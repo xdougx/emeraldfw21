@@ -12,7 +12,7 @@ $entity_obj.json_file_name = "#{$entity_obj.entity_base_dir}/emerald_projects.js
 
 def $entity_obj.project_list
   json = json_contents
-  json['projects']
+  json['projects'].sort
 end
 
 def $entity_obj.project_exists?(proj)
@@ -54,7 +54,7 @@ def $entity_obj.list
   print "Emerald Framework ".colorize(:green)
   puts "project\'s list:"
   $entity_obj.project_list.each do |p|
-    print "\t#{p}".colorize(:light_green)
+    print "  * #{p}".colorize(:light_green)
     puts (p === $entity_obj.current_project) ? " (current)" : " "
   end
 end
