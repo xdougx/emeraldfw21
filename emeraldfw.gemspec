@@ -26,8 +26,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.13"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.5"
-  spec.add_development_dependency "simplecov"
-  spec.add_development_dependency "codeclimate-test-reporter"  
+  spec.add_development_dependency "simplecov", "~> 0.12"
+  spec.add_development_dependency "codeclimate-test-reporter", "~> 0.6"
 
   spec.add_runtime_dependency "slop", "~> 4.4"
   spec.add_runtime_dependency "json", "~> 2.0"
