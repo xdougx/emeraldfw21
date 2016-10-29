@@ -1,3 +1,5 @@
+require 'zip'
+
 module EmeraldFW
 
   class Entity

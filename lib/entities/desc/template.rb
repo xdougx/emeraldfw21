@@ -2,17 +2,22 @@
 # Auxiliary
 #
 
-$entity_obj.entity_type = :project
+def $entity_obj.current_project
+  json = json_contents
+  json['current']
+end
 
-$entity_obj.valid_commands = [ :list, :create, :remove, :current, :notify, :unnotify ]
+$entity_obj.entity_type = :template
 
-$entity_obj.entity_base_dir = "#{ENV['HOME']}/emeraldfw"
+$entity_obj.valid_commands = [ :list, :create, :remove, :default ]
 
-$entity_obj.json_file_name = "#{$entity_obj.entity_base_dir}/emerald_projects.json"
+$entity_obj.entity_base_dir = "#{ENV['HOME']}/emeraldfw/#{$entity_obj.current_project}/web/templates"
+
+$entity_obj.json_file_name = "#{ENV['HOME']}/emeraldfw/#{$entity_obj.current_project}/web/config/emerald_projects.json"
 
 def $entity_obj.project_list
   json = json_contents
-  json['projects']
+  json['projects'].sort
 end
 
 def $entity_obj.project_exists?(proj)
@@ -41,44 +46,22 @@ def $entity_obj.email_in_notify_list?(email)
   json[json['current']]['notify_list'].include?(email)
 end
 
-def $entity_obj.current_project
-  json = json_contents
-  json['current']
-end
-
-def $entity_obj.unzip_project_files
-  Zip::File.open(project_structure_zip) do |zip_file|
-    zip_file.each do |entry|
-      entry_arr = entry.name.split('/')
-      base_dir = entry_arr.shift
-      dest_file_name = entry_arr.join('/')
-      dest_file = "#{project_full_path}/#{dest_file_name}".gsub('-ef-master','')
-      puts dest_file
-      FileUtils.rm_f(dest_file) if File.exist?(dest_file)
-      entry.extract(dest_file)
-    end
-  end
-end
 
 # 
 # Command's implementations
 # 
 
 def $entity_obj.list
-  puts __FILE__
-  puts File.expand_path(__FILE__)  
   print "Emerald Framework ".colorize(:green)
   puts "project\'s list:"
   $entity_obj.project_list.each do |p|
-    print "\t#{p} - #{$entity_obj.current_project}".colorize(:light_green)
-    puts (p == $entity_obj.current_project) ? " (current)" : ""
+    print "  * #{p}".colorize(:light_green)
+    puts (p === $entity_obj.current_project) ? " (current)" : " "
   end
 end
 
 def $entity_obj.create
   EmeraldFW.exit_error(201) if $entity_obj.project_exists?($entity_obj.project_name)
-  FileUtils.mkdir_p("#{$entity_obj.entity_base_dir}/#{$entity_obj.project_name}")
-  $entity_obj.unzip_project_files
   json = json_contents
   json['projects'].push($entity_obj.project_name)
   json['current'] = $entity_obj.project_name
