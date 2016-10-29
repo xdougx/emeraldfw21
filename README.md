@@ -48,13 +48,13 @@ $ emeraldfw project create <your_project_name>
 
 **(a.2)** To see a list of all Emerald applications in your workspace:
 
-```
+```bash
 $ emeraldfw project list
 ```
 
 **(a.3)** To remove an Emerald application from your workspace:
 
-```
+```bash
 $ emerald project remove <your_project_name>
 ```
 
@@ -62,7 +62,7 @@ $ emerald project remove <your_project_name>
 
 **(a.4)** To set the current project for anonymous actions (those who have effect on a project without specifying its name):
 
-```
+```bash
 $ emerald project current <your_project_name>
 ```
 
@@ -70,13 +70,13 @@ $ emerald project current <your_project_name>
 
 **(a.5)** To add an email to receive notifications about changes in the current project:
 
-```
+```bash
 $ emerald project notify <email_address>
 ```
 
 **(a.6)** To remove an email from the notifications list:
 
-```
+```bash
 $ emerald project unnotify <email_address>
 ```
 
@@ -104,13 +104,13 @@ A page is also piece of HTML code. It may contain invocations to many components
 To create a page:
 
 ```bash
-$ emeraldfw create page <page_name>
+$ emeraldfw page create <page_name>
 ```
 
 To delete a page:
 
 ```bash
-$ emeraldfw delete page <page_name>
+$ emeraldfw page remove <page_name>
 ```
 
 - **Component**
@@ -132,7 +132,7 @@ To delete a component:
 $ emeraldfw delete component <component_name>
 ```
 
-- **Media**
+- **Resource**
 
 Media is any image, video, sound, font or anything else you use to exhibit in your pages/templates.
 
@@ -141,16 +141,14 @@ You don't choose where Emerald Framework will put these files. It does this choi
 To add some media file to your app, just do:
 
 ```bash
-$ emeraldfw add media <path/to/the/media_file>
+$ emeraldfw resource add <path/to/the/media_file>
 ```
 
 To remove some media file from your app:
 
 ```bash
-$ emeraldfw remove media <media_file>
+$ emeraldfw resource remove <path/to/the/media_file>
 ```
-
-IMPORTANT: You don't need to specify the path to remove. Emerald will find the file for you.
 
 - **Library**
 
