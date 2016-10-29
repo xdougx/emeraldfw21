@@ -52,7 +52,7 @@ def $entity_obj.unzip_project_files
   Zip::File.open(app_structure_file) do |zip_file|
     zip_file.each do |entry|
       entry_arr = entry.name.split('/')
-      base_dir = entry_arr.shift
+      entry_arr.shift
       dest_file_name = entry_arr.join('/')
       dest_file = "#{entity_base_dir}/#{$entity_obj.project_name}/#{dest_file_name}"
       puts dest_file

@@ -41,10 +41,31 @@ Emerald is based in some 'entities'. There are six of them by now.
 A project is an Emerald application. In order to create a new Emerald application:
 
 ```bash
-$ emeraldfw create project <your_project_name>
+$ emeraldfw project create <your_project_name>
 ```
 
-IMPORTANT: Emerald apps are created at `ENV['HOME']/emeraldfw/` directory. It is impossible to change this right now, but in future versions this location will be dictated by the user.
+**IMPORTANT:** Emerald apps are created at `ENV['HOME']/emeraldfw/` directory. It is impossible to change this right now, but in future versions this location will be dictated by the user.
+To see a list of all Emerald applications in your workspace:
+
+```
+$ emeraldfw project list
+```
+
+To remove an Emerald application from your workspace:
+
+```
+$ emerald project remove <your_project_name>
+```
+
+**IMPORTANT:** This action can't be undone. Be sure to have a backup if you use it, and be sure to use it against the correct project. We assume you are intelligent and smart enough o avoid erasing an important project and we won't treat you like Windows do, asking a many times if you are sure. So, be sure!
+
+To set the current project for anonymous actions (those who have effect on a project without specifying its name):
+
+```
+$ emerald project current <your_project_name>
+```
+
+**IMPORTANT:** When you create a project it turns out to be the current project.
 
 - **Template**
 
