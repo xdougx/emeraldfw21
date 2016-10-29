@@ -1,6 +1,6 @@
 # Emerald Framework
 
-[![Code Climate](https://codeclimate.com/github/EdDeAlmeidaJr/emeraldfw/badges/gpa.svg)](https://codeclimate.com/github/EdDeAlmeidaJr/emeraldfw)
+[![Code Climate](https://codeclimate.com/github/EdDeAlmeidaJr/emeraldfw21/badges/gpa.svg)](https://codeclimate.com/github/EdDeAlmeidaJr/emeraldfw21)
 [![Test Coverage](https://codeclimate.com/github/EdDeAlmeidaJr/emeraldfw/badges/coverage.svg)](https://codeclimate.com/github/EdDeAlmeidaJr/emeraldfw/coverage)
 
 Emerald Frameework is a full-stack web development framework designed for the strong!
