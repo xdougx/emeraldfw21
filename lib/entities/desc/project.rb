@@ -54,7 +54,8 @@ def $entity_obj.list
   print "Emerald Framework ".colorize(:green)
   puts "project\'s list:"
   $entity_obj.project_list.each do |p|
-    puts "\t#{p}".colorize(:light_green)
+    print "\t#{p}".colorize(:light_green)
+    puts (p === $entity_obj.current_project) ? " (current)" : " "
   end
 end
 
