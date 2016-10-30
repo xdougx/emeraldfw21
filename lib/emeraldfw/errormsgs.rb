@@ -8,7 +8,8 @@ module EmeraldFW
     105 => "This email is not in the notify list for the current project.",
 
   	201 => "Project already exists.",
-  	202 => "Project does not exist."
+  	202 => "Project does not exist.",
+    203 => "No current project is set."
     
   }
 

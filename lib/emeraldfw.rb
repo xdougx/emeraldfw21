@@ -25,13 +25,16 @@ module EmeraldFW
 
     # Isolates the entity which will handle the command line request
     @entity = @arguments[0]
-    exit_error(103,@entites) if not @entities.include?(@entity.to_sym)
+    exit_error(103,@entities) if not @entities.include?(@entity.to_sym)
 
     # Creates an instante of the entity class
     $entity_obj = EmeraldFW::Entity.new(@arguments,@options)
 
+    # Project methods are required by all entities
+    require "entities/desc/project"
+
     # Requires the correct block for the entity type
-    require "entities/desc/#{@entity}"
+    require "entities/desc/#{@entity}" if @entity != "project"
 
     # Process the command required at the command line
     $entity_obj.execute_command

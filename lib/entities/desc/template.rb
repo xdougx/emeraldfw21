@@ -2,25 +2,20 @@
 # Auxiliary
 #
 
-def $entity_obj.current_project
-  json = json_contents
-  json['current']
-end
-
 $entity_obj.entity_type = :template
 
 $entity_obj.valid_commands = [ :list, :create, :remove, :default ]
 
 $entity_obj.entity_base_dir = "#{ENV['HOME']}/emeraldfw/#{$entity_obj.current_project}/web/templates"
 
-$entity_obj.json_file_name = "#{ENV['HOME']}/emeraldfw/#{$entity_obj.current_project}/web/config/emerald_projects.json"
+$entity_obj.json_file_name = "#{ENV['HOME']}/emeraldfw/#{$entity_obj.current_project}/web/config/templates.json"
 
-def $entity_obj.project_list
+def $entity_obj.templates_list
   json = json_contents
-  json['projects'].sort
+  json.keys
 end
 
-def $entity_obj.project_exists?(proj)
+def $entity_obj.template_exists?(proj)
   $entity_obj.project_list.include?(proj)
 end
 

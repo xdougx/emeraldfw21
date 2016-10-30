@@ -4,7 +4,7 @@ module EmeraldFW
 
   class Entity
 
-    attr_accessor :entity_type, :valid_commands, :entity_base_dir, :json_file_name
+    attr_accessor :entity_type, :valid_commands
 
     def initialize(args,opts)
       @args = args
@@ -15,11 +15,11 @@ module EmeraldFW
       valid_commands.include?(@command)
     end
 
-    def json_contents
+    def json_contents(json_file_name)
       JSON.load(File.read(json_file_name))
     end
 
-    def json_write(json)
+    def json_write(json_file_name,json)
       File.open(json_file_name,"w") do |f| 
         f.write(JSON.pretty_generate(json))
       end 
