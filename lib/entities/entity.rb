@@ -11,8 +11,8 @@ module EmeraldFW
       @opts = opts
     end
 
-    def is_valid_command?
-      valid_commands.include?(@command)
+    def entity_name
+      @args[2]
     end
 
     def json_contents(json_file_name)
@@ -25,10 +25,23 @@ module EmeraldFW
       end 
     end
 
+    def is_valid_command?
+      valid_commands.include?(@command)
+    end    
+
     def execute_command
       @command = @args[1].to_sym
       EmeraldFW.exit_error(102,@valid_commands) if not is_valid_command?
       method(@command).call
+    end
+
+    def valid_email?(email)
+      true
+    end
+
+    def email_in_notify_list?(email)
+      json = projects_json
+      json[json['current']]['notify_list'].include?(email)
     end
 
   end

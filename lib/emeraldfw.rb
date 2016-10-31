@@ -5,6 +5,7 @@ require "emeraldfw/errormsgs"
 require "emeraldfw/version"
 
 require "entities/entity"
+require "entities/project"
 
 module EmeraldFW
 
