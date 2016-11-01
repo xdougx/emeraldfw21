@@ -29,16 +29,8 @@ module EmeraldFW
     exit_error(103,@entities) if not @entities.include?(@entity.to_sym)
 
     # Creates an instante of the entity class
-    $entity_obj = EmeraldFW::Entity.new(@arguments,@options)
-
-    # Project methods are required by all entities
-    require "entities/desc/project"
-
-    # Requires the correct block for the entity type
-    require "entities/desc/#{@entity}" if @entity != "project"
-
-    # Process the command required at the command line
-    $entity_obj.execute_command
+    entity_class = "EmeraldFW::#{@entity.capitalize}".split('::').inject(Object) {|o,c| o.const_get c}.new(@arguments,@options)
+    entity_class.execute_command
 
   end
 

@@ -10,7 +10,7 @@ module EmeraldFW
   	  [ :list, :create, :remove, :current, :notify, :unnotify ]
   	end
 
-  	def 
+  	def projects_base_dir
   	  "#{ENV['HOME']}/emeraldfw"
   	end
 
@@ -57,9 +57,9 @@ module EmeraldFW
   	def list
   	  print "Emerald Framework ".colorize(:green)
   	  puts "project\'s list:"
-  	  $entity_obj.projects_list.each do |p|
+  	  projects_list.each do |p|
   	    print "  * #{p}".colorize(:light_green)
-  	    puts (p == $entity_obj.current_project) ? " (current)" : ""
+  	    puts (p == current_project) ? " (current)" : ""
   	  end
   	end
 
