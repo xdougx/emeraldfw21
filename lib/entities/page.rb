@@ -68,21 +68,19 @@ module EmeraldFW
       print "#{@project.current_project} ".colorize(:light_green)
       puts  "pages:"
   	  pages_list.each do |p|
-  	    print "  * #{p}".colorize(:light_green)
+  	    puts "  * #{p}".colorize(:light_green)
   	  end
   	end
 
   	def create
       EmeraldFW.exit_error(203) if @project.current_project.empty?
-  	  EmeraldFW.exit_error(211) if template_exists?(template_name)
+  	  EmeraldFW.exit_error(211) if page_exists?(page_name)
       # Create the template file and its initial content
-      FileUtils.touch("#{templates_base_dir}/#{template_name}.html")
+      FileUtils.touch("#{pages_base_dir}/#{page_name}.html")
       # TODO: Include the basic contents of the new template
-  	  json = templates_json
-  	  json['templates'][template_name] = { "libraries": [] }
-      # TODO: Include the libraries choosen
-  	  json['default'] = template_name
-  	  json_write(templates_json_file,json)
+  	  json = pages_json
+  	  json[page_name] = { "template": "default", "insertion_point": { "tag": "body" } }
+  	  json_write(pages_json_file,json)
   	end
 
   	def remove
