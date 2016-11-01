@@ -104,9 +104,9 @@ module EmeraldFW
 
   	def default
   	  EmeraldFW.exit_error(212) if not template_exists?(template_name)
-  	  json = projects_json
-  	  json['current'] = project_name
-  	  json_write(projects_json_file,json)
+  	  json = templates_json
+  	  json['default'] = template_name
+  	  json_write(templates_json_file,json)
   	end
 
   end
