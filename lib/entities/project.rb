@@ -65,7 +65,7 @@ module EmeraldFW
   	# 
 
   	def list
-  	  print "Emerald Framework ".colorize(:green)
+  	  print "Emerald Framework ".colorize(:green).bold
   	  puts "project\'s list:"
   	  projects_list.each do |p|
   	    print "  * #{p}".colorize(:light_green)
