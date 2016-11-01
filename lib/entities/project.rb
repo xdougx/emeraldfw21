@@ -40,6 +40,10 @@ module EmeraldFW
       @args[2]
     end
 
+    def email
+      @args[2]
+    end
+
   	def unzip_project_files
   	  this_path = File.expand_path("../../../files", __FILE__)
   	  app_structure_file = "#{this_path}/appstructure-ef.zip"
