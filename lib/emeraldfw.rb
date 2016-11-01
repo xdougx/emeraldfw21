@@ -7,6 +7,7 @@ require "emeraldfw/version"
 require "entities/entity"
 require "entities/project"
 require "entities/template"
+require "entities/page"
 
 module EmeraldFW
 

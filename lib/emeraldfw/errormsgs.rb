@@ -12,7 +12,9 @@ module EmeraldFW
     203 => "No current project is set.",
     211 => "Template already exists.",
     212 => "Template does not exist.",
-    213 => "No default template is set."
+    213 => "No default template is set.",
+    221 => "Page already exists.",
+    222 => "Page does not exist."
 
   }
 

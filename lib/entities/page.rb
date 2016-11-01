@@ -1,64 +1,60 @@
 module EmeraldFW
 
-  class Template < EmeraldFW::Entity
+  class Page < EmeraldFW::Entity
 
     def initialize(args,opts)
       @project = EmeraldFW::Project.new(args,opts)
       EmeraldFW.exit_error(203) if @project.current_project.empty?
-      template_file_generate if not File.exist?(templates_json_file)
+      page_file_generate if not File.exist?(pages_json_file)
       super(args,opts)
     end
 
   	def entity_type
-  	  :template 
+  	  :page 
   	end
 
   	def valid_commands
-  	  [ :list, :create, :remove, :default ]
+  	  [ :list, :create, :remove ]
   	end
 
-  	def templates_base_dir
-  	  "#{ENV['HOME']}/emeraldfw/#{@project.current_project}/web/views/templates"
+  	def pages_base_dir
+  	  "#{ENV['HOME']}/emeraldfw/#{@project.current_project}/web/views/pages"
   	end
 
-  	def templates_json_file
-      "#{ENV['HOME']}/emeraldfw/#{@project.current_project}/config/templates.json"
+  	def pages_json_file
+      "#{ENV['HOME']}/emeraldfw/#{@project.current_project}/config/pages.json"
   	end
 
-    def template_file_generate
-      File.open(templates_json_file,"w") do |f| 
-        f.write(JSON.pretty_generate(templates_file_basic_structure))
+    def page_file_generate
+      File.open(pages_json_file,"w") do |f| 
+        f.write(JSON.pretty_generate(pages_file_basic_structure))
       end
     end
 
-    def templates_file_basic_structure
+    def pages_file_basic_structure
       {
-        "default": "default",
-        "templates": {
-          "default": {
-            "libraries": []
+        "index": {
+          "template": "default",
+          "insertion_point": {
+            "tag": "body"
           }
         }
       }
     end
 
-  	def templates_json
-  	  json_contents(templates_json_file)
+  	def pages_json
+  	  json_contents(pages_json_file)
   	end
 
-  	def templates_list
-  	  templates_json['templates'].keys
+  	def pages_list
+  	  pages_json.keys
   	end
 
-  	def template_exists?(temp)
-  	  templates_list.include?(temp)
+  	def page_exists?(temp)
+  	  pages_list.include?(temp)
   	end
 
-  	def default_template
-  	  templates_json['default']
-  	end
-
-    def template_name
+    def page_name
       @args[2]
     end
 
@@ -70,10 +66,9 @@ module EmeraldFW
   	  print "Emerald Framework ".colorize(:green).bold
   	  print " - Project "
       print "#{@project.current_project} ".colorize(:light_green)
-      puts  "templates:"
-  	  templates_list.each do |t|
-  	    print "  * #{t}".colorize(:light_green)
-  	    puts (t == default_template) ? " (default)" : ""
+      puts  "pages:"
+  	  pages_list.each do |p|
+  	    print "  * #{p}".colorize(:light_green)
   	  end
   	end
 
