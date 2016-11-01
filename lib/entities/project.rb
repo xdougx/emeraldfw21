@@ -1,3 +1,5 @@
+require 'zip'
+
 module EmeraldFW
 
   class Project < EmeraldFW::Entity
@@ -34,15 +36,19 @@ module EmeraldFW
   	  projects_json['current']
   	end
 
+    def project_name
+      @args[2]
+    end
+
   	def unzip_project_files
-  	  this_path = File.expand_path("../../../../files", __FILE__)
+  	  this_path = File.expand_path("../../../files", __FILE__)
   	  app_structure_file = "#{this_path}/appstructure-ef.zip"
   	  Zip::File.open(app_structure_file) do |zip_file|
   	    zip_file.each do |entry|
   	      entry_arr = entry.name.split('/')
   	      entry_arr.shift
   	      dest_file_name = entry_arr.join('/')
-  	      dest_file = "#{projects_base_dir}/#{$entity_obj.project_name}/#{dest_file_name}"
+  	      dest_file = "#{projects_base_dir}/#{project_name}/#{dest_file_name}"
   	      puts dest_file
   	      FileUtils.rm_f(dest_file) if File.exist?(dest_file)
   	      entry.extract(dest_file)
@@ -64,50 +70,50 @@ module EmeraldFW
   	end
 
   	def create
-  	  EmeraldFW.exit_error(201) if $entity_obj.project_exists?($entity_obj.project_name)
-  	  FileUtils.mkdir_p("#{$entity_obj.projects_base_dir}/#{$entity_obj.project_name}")
-  	  $entity_obj.unzip_project_files
-  	  json = $entity_obj.projects_json
-  	  json['projects'].push($entity_obj.project_name)
-  	  json['current'] = $entity_obj.project_name
-  	  json[$entity_obj.project_name] = {}
-  	  json[$entity_obj.project_name]['notify_list'] = []
-  	  $entity_obj.json_write(projects_json_file,json)
+  	  EmeraldFW.exit_error(201) if project_exists?(project_name)
+  	  FileUtils.mkdir_p("#{projects_base_dir}/#{project_name}")
+  	  unzip_project_files
+  	  json = projects_json
+  	  json['projects'].push(project_name)
+  	  json['current'] = project_name
+  	  json[project_name] = {}
+  	  json[project_name]['notify_list'] = []
+  	  json_write(projects_json_file,json)
   	end
 
   	def remove
-  	  EmeraldFW.exit_error(202) if not $entity_obj.project_exists?($entity_obj.project_name)
-  	  FileUtils.rm_rf("#{$entity_obj.projects_base_dir}/#{$entity_obj.project_name}")
-  	  json = $entity_obj.projects_json
-  	  json['projects'].delete($entity_obj.project_name)
-  	  json['current'] = "" if json['current'] == $entity_obj.project_name
-  	  json.delete($entity_obj.project_name)
-  	  $entity_obj.json_write(projects_json_file,json)
+  	  EmeraldFW.exit_error(202) if not project_exists?(project_name)
+  	  FileUtils.rm_rf("#{projects_base_dir}/#{project_name}")
+  	  json = projects_json
+  	  json['projects'].delete(project_name)
+  	  json['current'] = "" if json['current'] == project_name
+  	  json.delete(project_name)
+  	  json_write(projects_json_file,json)
   	end
 
   	def current
-  	  EmeraldFW.exit_error(202) if not $entity_obj.project_exists?($entity_obj.project_name)
-  	  json = $entity_obj.projects_json
-  	  json['current'] = $entity_obj.project_name
-  	  $entity_obj.json_write(projects_json_file,json)
+  	  EmeraldFW.exit_error(202) if not project_exists?(project_name)
+  	  json = projects_json
+  	  json['current'] = project_name
+  	  json_write(projects_json_file,json)
   	end
 
   	def notify
-  	  EmeraldFW.exit_error(104) if not $entity_obj.valid_email?($entity_obj.email)
-  	  EmeraldFW.exit_error(203,$entity_obj.projects_list) if $entity_obj.current_project.empty?
-  	  json = $entity_obj.projects_json
-  	  project_key = $entity_obj.current_project
-  	  json[project_key]['notify_list'].push($entity_obj.email)
-  	  $entity_obj.json_write(projects_json_file,json)
+  	  EmeraldFW.exit_error(104) if not valid_email?(email)
+  	  EmeraldFW.exit_error(203,projects_list) if current_project.empty?
+  	  json = projects_json
+  	  project_key = current_project
+  	  json[project_key]['notify_list'].push(email)
+  	  json_write(projects_json_file,json)
   	end
 
   	def unnotify
-  	  EmeraldFW.exit_error(104) if not $entity_obj.valid_email?($entity_obj.email)
-  	  EmeraldFW.exit_error(105) if not $entity_obj.email_in_notify_list?($entity_obj.email)
-  	  json = $entity_obj.projects_json
-  	  project_key = $entity_obj.current_project
-  	  json[project_key]['notify_list'].delete($entity_obj.email)
-  	  $entity_obj.json_write(projects_json_file,json)
+  	  EmeraldFW.exit_error(104) if not valid_email?(email)
+  	  EmeraldFW.exit_error(105) if not email_in_notify_list?(email)
+  	  json = projects_json
+  	  project_key = current_project
+  	  json[project_key]['notify_list'].delete(email)
+  	  json_write(projects_json_file,json)
   	end
   end
 
