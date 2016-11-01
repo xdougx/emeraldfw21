@@ -16,7 +16,8 @@ module EmeraldFW
   # Exit point
  
   def self.exit_error(code,possibilities=[])
-    print "Emerald Framework says: "
+    print "Emerald Framework".colorize(:green).bold
+    print " says: "
     puts @errormsgs[code].colorize(:light_red).bold
     if not possibilities.empty? then
       puts "It should be:"
