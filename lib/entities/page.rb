@@ -76,8 +76,9 @@ module EmeraldFW
       EmeraldFW.exit_error(203) if @project.current_project.empty?
   	  EmeraldFW.exit_error(211) if page_exists?(page_name)
       # Create the page file and its initial content
-      FileUtils.touch("#{pages_base_dir}/#{page_name}.html")
-      # TODO: Include the basic contents of the new template
+      File.open("#{pages_base_dir}/#{page_name}.html","w") do |f| 
+        f.write(page_basic_content)
+      end
   	  json = pages_json
   	  json[page_name] = { "template": "default", "insertion_point": { "tag": "body" } }
   	  json_write(pages_json_file,json)
@@ -86,11 +87,14 @@ module EmeraldFW
   	def remove
   	  EmeraldFW.exit_error(222) if not page_exists?(page_name)
   	  FileUtils.rm_rf("#{pages_base_dir}/#{page_name}.html")
-      # Remove the page file
   	  json = pages_json
   	  json.delete(page_name)
   	  json_write(pages_json_file,json)
   	end
+
+    def page_basic_content
+      "<h2>#{page_name}.html</h2>\n<h3>This page may be found at #{pages_base_dir}.</h3>"
+    end
 
   end
 
