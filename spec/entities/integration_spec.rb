@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe EmeraldFW::Entity::Component do 
+describe EmeraldFW::Entity::Integration do 
 
   context 'Methods' do
 

@@ -11,7 +11,7 @@ require "entities/page"
 
 module EmeraldFW
 
-  @entities = [ :component, :email, :form, :library, :page, :project, :resource, :template ].sort
+  @entities = [ :component, :email, :form, :library, :page, :project, :resource, :template, :integration ].sort
 
   def self.emeraldfw_init
     FileUtils.mkdir_p(emerald_projects_dir) if not File.exist?(emerald_projects_dir)
