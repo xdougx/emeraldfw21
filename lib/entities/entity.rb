@@ -6,9 +6,13 @@ module EmeraldFW
 
     attr_accessor :entity_type, :valid_commands
 
-    def self.initialize(args,opts)
+    def initialize(args,opts)
       @args = args
-      @opts = opts
+      @opts = clean_options(opts)
+    end
+
+    def clean_options(opts)
+      opts.reject{ |k,v| @valid_options.include?(k.to_sym) }
     end
 
     def entity_name

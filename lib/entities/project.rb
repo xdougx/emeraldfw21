@@ -4,6 +4,11 @@ module EmeraldFW
 
   class Project < EmeraldFW::Entity
 
+    def initialize(args,opts)
+      @valid_options = [ :language, :test, :database, :archetype ]
+      super(args,opts)
+    end
+
   	def entity_type
   	  :project
   	end

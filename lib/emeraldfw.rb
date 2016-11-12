@@ -37,8 +37,9 @@ module EmeraldFW
     exit_error(103,@entities) if not @entities.include?(@entity.to_sym)
 
     # Creates an instante of the entity class
-    entity_class = "EmeraldFW::#{@entity.capitalize}".split('::').inject(Object) {|o,c| o.const_get c}.new(@arguments,@options)
-    entity_class.execute_command
+    entity_class = "EmeraldFW::#{@entity.capitalize}".split('::').inject(Object) {|o,c| o.const_get c}
+    entity_instance = entity_class.new(@arguments,@options)
+    entity_instance.execute_command
 
   end
 
