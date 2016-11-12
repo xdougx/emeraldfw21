@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe EmeraldFW::Entity::Page do 
+describe EmeraldFW::Page do 
 
   context 'Methods' do
 

@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe EmeraldFW::Entity::Form do 
+describe EmeraldFW::Form do 
 
   context 'Methods' do
 

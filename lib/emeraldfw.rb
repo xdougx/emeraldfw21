@@ -5,9 +5,15 @@ require "emeraldfw/errormsgs"
 require "emeraldfw/version"
 
 require "entities/entity"
-require "entities/project"
-require "entities/template"
+require "entities/component"
+require "entities/email"
+require "entities/form"
+require "entities/integration"
+require "entities/library"
 require "entities/page"
+require "entities/project"
+require "entities/resource"
+require "entities/template"
 
 module EmeraldFW
 

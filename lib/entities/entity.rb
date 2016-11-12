@@ -6,7 +6,7 @@ module EmeraldFW
 
     attr_accessor :entity_type, :valid_commands
 
-    def initialize(args,opts)
+    def self.initialize(args,opts)
       @args = args
       @opts = opts
     end
