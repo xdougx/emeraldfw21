@@ -14,7 +14,7 @@ module EmeraldFW
   	end
 
   	def valid_commands
-  	  [ :list, :create, :remove, :current, :notify, :unnotify ]
+  	  [ :list, :create, :remove, :current ]
   	end
 
   	def projects_base_dir
@@ -107,23 +107,6 @@ module EmeraldFW
   	  json_write(projects_json_file,json)
   	end
 
-  	def notify
-  	  EmeraldFW.exit_error(104) if not valid_email?(email)
-  	  EmeraldFW.exit_error(203,projects_list) if current_project.empty?
-  	  json = projects_json
-  	  project_key = current_project
-  	  json[project_key]['notify_list'].push(email)
-  	  json_write(projects_json_file,json)
-  	end
-
-  	def unnotify
-  	  EmeraldFW.exit_error(104) if not valid_email?(email)
-  	  EmeraldFW.exit_error(105) if not email_in_notify_list?(email)
-  	  json = projects_json
-  	  project_key = current_project
-  	  json[project_key]['notify_list'].delete(email)
-  	  json_write(projects_json_file,json)
-  	end
   end
 
 end

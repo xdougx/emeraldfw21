@@ -40,6 +40,7 @@ module EmeraldFW
     end
 
     def valid_email?(email)
+      # TODO: Check (regular expression) if the given email is valid
       true
     end
 

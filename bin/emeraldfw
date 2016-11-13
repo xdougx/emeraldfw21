@@ -28,7 +28,10 @@ opts = Slop.parse do |o|
   o.boolean '-D', '--dynamic',   'Dynamic component',                                  default: false
 
   # Parameters for Form
-  o.string '-f', '--fields',     'Fields to add to a form',                            default: nil 
+  o.string '-f', '--fields',     'Fields to add to a form',                            default: nil
+
+  # Parameters for Resource
+  o.string '-r', '--rlibrary',   'Resource library to add the resource',               default: 'main'
 
 end
 
