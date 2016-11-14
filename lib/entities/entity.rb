@@ -12,7 +12,7 @@ module EmeraldFW
     end
 
     def clean_options(opts)
-      opts.reject{ |k,v| @valid_options.include?(k.to_sym) }
+      opts.reject{ |k,v| not @valid_options.include?(k.to_sym) }
     end
 
     def entity_name
