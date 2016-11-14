@@ -31,7 +31,7 @@ opts = Slop.parse do |o|
   o.string '-f', '--fields',     'Fields to add to a form',                            default: nil
 
   # Parameters for Resource
-  o.string '-r', '--rlibrary',   'Resource library to add the resource',               default: 'main'
+  o.string '-r', '--rlibrary',   'Resource library to add the resource',               default: 'default'
 
 end
 

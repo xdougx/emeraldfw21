@@ -6,6 +6,7 @@ module EmeraldFW
       @project = EmeraldFW::Project.new(args,opts)
       EmeraldFW.exit_error(203) if @project.current_project.empty?
       template_file_generate if not File.exist?(templates_json_file)
+      @valid_options = [ :jslibs ]
       super(args,opts)
     end
 
