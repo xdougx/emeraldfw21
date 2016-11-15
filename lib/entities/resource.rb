@@ -26,6 +26,8 @@ module EmeraldFW
   	# 
 
   	def list
+  	  rlibs = Dir.entries(resources_base_dir).reject{ |d| (d == '.') || (d == '..') }.sort
+  	  puts rlibs
   	end
 
   	def create
