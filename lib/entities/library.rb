@@ -1,3 +1,5 @@
+require 'httparty'
+
 module EmeraldFW
 
   class Library < EmeraldFW::Entity
@@ -36,6 +38,21 @@ module EmeraldFW
   	end
 
   	def create
+  	  zip_file = HTTParty.get("https://codeload.github.com/EmeraldFramework/#{entity_name}-ef/zip/master")
+  	  tempfile = Tempfile.new('zipfile.zip').tap do |f|
+  	    f.write(zip_file.to_s)
+  	  end
+  	  Zip::File.open(tempfile) do |zip_file|
+  	    zip_file.each do |entry|
+  	      puts "Extracting #{entry.name}".gsub('-ef-master','')
+  	      entry_arr = entry.name.split('/')
+  	      base_dir = entry_arr.shift
+  	      dest_file_name = entry_arr.join('/')
+  	      dest_file = "#{libraries_base_dir}/#{entity_name}/#{dest_file_name}".gsub('-ef-master','')
+  	      FileUtils.rm_f(dest_file) if File.exist?(dest_file)
+  	      entry.extract(dest_file)
+  	    end
+  	  end
   	end
 
   	def remove

@@ -6,6 +6,7 @@ module EmeraldFW
   	103 => "Invalid entity.",
     104 => "Invalid email.",
     105 => "This email is not in the notify list for the current project.",
+    106 => "There is no Emerald Framework package for such library yet. Consider creating it yourself.",
 
   	201 => "Project already exists.",
   	202 => "Project does not exist.",
@@ -14,7 +15,9 @@ module EmeraldFW
     212 => "Template does not exist.",
     213 => "No default template is set.",
     221 => "Page already exists.",
-    222 => "Page does not exist."
+    222 => "Page does not exist.",
+    231 => "Library is already created.",
+    232 => "Library is not created."
 
   }
 

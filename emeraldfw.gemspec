@@ -36,5 +36,6 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "github_api", "~> 0.14"
   spec.add_runtime_dependency "colorize", "~> 0.8"
   spec.add_runtime_dependency "rubyzip", "~> 1.2"
+  spec.add_runtime_dependency "httparty", "~> 0.14"
 
 end

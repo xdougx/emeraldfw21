@@ -27,7 +27,8 @@ module EmeraldFW
 
   	def list
   	  print "Project: "
-  	  puts @project.current_project.colorize(:green)
+  	  print @project.current_project.colorize(:green)
+      puts "'s resources: "
   	  rlibs = Dir.entries(resources_base_dir).reject { |d| (d == '.') || (d == '..') }.sort
   	  rlibs.each do |lib| 
   	  	print "   Resource library: "
