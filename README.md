@@ -136,18 +136,18 @@ $ emeraldfw delete component <component_name>
 
 Media is any image, video, sound, font or anything else you use to exhibit in your pages/templates.
 
-You don't choose where Emerald Framework will put these files. It does this choice for you.
+You don't choose where Emerald Framework will put these files. It does this for you.
 
 To add some media file to your app, just do:
 
 ```bash
-$ emeraldfw resource add <path/to/the/media_file>
+$ emeraldfw resource create <path/to/the/media_file> [ --rlibrary | -r <resource_library_name>]
 ```
 
 To remove some media file from your app:
 
 ```bash
-$ emeraldfw resource remove <path/to/the/media_file>
+$ emeraldfw resource remove <path/to/the/media_file> [ --rlibrary | -r <resource_library_name>]
 ```
 
 - **Library**
