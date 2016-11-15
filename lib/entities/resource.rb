@@ -40,7 +40,11 @@ module EmeraldFW
   	end
 
   	def create
-  	  
+  	  library = @opts[:rlibrary]
+  	  library_dir = "#{resources_base_dir}/#{library}"
+  	  FileUtils.mkdir_p(library_dir) if not File.exist?(library_dir)
+  	  resource_file = "#{entity_name}"
+  	  FileUtils.mv(resource_file,library_dir,:verbose => true)
   	end
 
   	def remove
