@@ -23,6 +23,10 @@ module EmeraldFW
   	  "#{ENV['HOME']}/emeraldfw/#{@project.current_project}/web/libraries"
   	end
 
+  	def libraries
+  	  Dir.entries(libraries_base_dir).reject { |d| (d == '.') || (d == '..') }.sort
+  	end
+
   	# 
   	# Command's implementations
   	# 
@@ -31,13 +35,13 @@ module EmeraldFW
   	  print "Project "
   	  print @project.current_project.colorize(:green)
   	  puts "'s libraries: "
-  	  libraries = Dir.entries(libraries_base_dir).reject { |d| (d == '.') || (d == '..') }.sort
   	  libraries.each do |lib|
   	  	puts  "   #{lib}".colorize(:light_green)
   	  end
   	end
 
   	def create
+  	  EmeraldFW.exit_error(231) if File.exist?("#{libraries_base_dir}/#{entity_name}")
   	  zip_file = HTTParty.get("https://codeload.github.com/EmeraldFramework/#{entity_name}-ef/zip/master")
   	  tempfile = Tempfile.new('zipfile.zip').tap do |f|
   	    f.write(zip_file.to_s)
@@ -56,6 +60,7 @@ module EmeraldFW
   	end
 
   	def remove
+  	  EmeraldFW.exit_error(232,libraries) if not File.exist?("#{libraries_base_dir}/#{entity_name}")
   	  FileUtils.rm_rf("#{libraries_base_dir}/#{entity_name}",:verbose => true)
   	end 	
 
