@@ -28,11 +28,11 @@ module EmeraldFW
   	def list
   	  print "Project: "
   	  puts @project.current_project.colorize(:green)
-  	  rlibs = Dir.entries(resources_base_dir).reject{ |d| (d == '.') || (d == '..') }.sort
+  	  rlibs = Dir.entries(resources_base_dir).reject { |d| (d == '.') || (d == '..') }.sort
   	  rlibs.each do |lib| 
   	  	print "   Resource library: "
   	  	puts  lib.colorize(:light_green)
-  	  	assets = Dir.entries("#{resources_base_dir}/#{lib}").reject{ |d| (d == '.') || (d == '..') }.sort
+  	  	assets = Dir.entries("#{resources_base_dir}/#{lib}").reject { |d| (d == '.') || (d == '..') }.sort
   	  	assets.each do |asset|
   	  	  puts "      #{asset}"
   	  	end
@@ -48,6 +48,8 @@ module EmeraldFW
   	end
 
   	def remove
+  	  resource_file = "#{resources_base_dir}/#{@opts[:rlibrary]}/#{entity_name}"
+  	  FileUtils.rm_f(resource_file,:verbose => true)
   	end 	
 
   end
