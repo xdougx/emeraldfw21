@@ -56,6 +56,7 @@ module EmeraldFW
   	end
 
   	def remove
+  	  FileUtils.rm_rf("#{libraries_base_dir}/#{entity_name}",:verbose => true)
   	end 	
 
   end

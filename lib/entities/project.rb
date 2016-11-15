@@ -92,7 +92,7 @@ module EmeraldFW
 
   	def remove
   	  EmeraldFW.exit_error(202) if not project_exists?(project_name)
-  	  FileUtils.rm_rf("#{projects_base_dir}/#{project_name}")
+  	  FileUtils.rm_rf("#{projects_base_dir}/#{project_name}",:verbose => true)
   	  json = projects_json
   	  json['projects'].delete(project_name)
   	  json['current'] = "" if json['current'] == project_name
